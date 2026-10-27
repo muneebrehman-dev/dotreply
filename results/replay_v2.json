@@ -1,0 +1,75 @@
+{
+ "alex_live_chat#1": {
+  "convo": [
+   {
+    "role": "agent",
+    "messages": [
+     "Hi Alex, it\u2019s STUDIO. Saw the Everyday Tee in white M didn\u2019t finish. Was it the shipping cost that stopped you?"
+    ],
+    "action": "none",
+    "discount_code": null,
+    "blocker": "shipping_cost",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "Yes can you tell me about the discounts ?"
+   },
+   {
+    "role": "agent",
+    "messages": [
+     "Add another tee and shipping's free."
+    ],
+    "action": "none",
+    "discount_code": null,
+    "blocker": "shipping_cost",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "is there anyother discounts available ?"
+   },
+   {
+    "role": "agent",
+    "messages": [
+     "Sure thing, Alex. We can give you free standard shipping with code SHIPFREE. That\u2019s the only discount we can offer right now."
+    ],
+    "action": "send_checkout_link",
+    "discount_code": "SHIPFREE",
+    "blocker": "price",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "hey yeah, i'm between M and L. does it run small?"
+   },
+   {
+    "role": "agent",
+    "messages": [
+     "The tee runs true to size. If you want a closer fit, go with M; if you prefer a relaxed look, L works well."
+    ],
+    "action": "none",
+    "discount_code": null,
+    "blocker": "fit",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "I think the L would be better"
+   },
+   {
+    "role": "agent",
+    "messages": [
+     "Got it, L it is. Here\u2019s your bag, white L is saved."
+    ],
+    "action": "send_checkout_link",
+    "discount_code": null,
+    "blocker": "fit",
+    "_after_stop": false
+   }
+  ],
+  "rules": [],
+  "quality": [],
+  "rewrites": 0
+ }
+}

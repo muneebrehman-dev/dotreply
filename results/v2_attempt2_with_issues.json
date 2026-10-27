@@ -1,0 +1,662 @@
+{
+ "v2:size_between": {
+  "version": "v2",
+  "persona": "size_between",
+  "label": "Unsure about size",
+  "outcome": "purchased",
+  "replied": true,
+  "violations": [],
+  "long_bubbles": 0,
+  "judge": {
+   "human": 4,
+   "brevity": 5,
+   "accuracy": 2,
+   "handling": 5,
+   "brand_safety": 2,
+   "issues": [
+    "Agent incorrectly claimed the tee runs small, contradicting store facts",
+    "Provided misleading fit information"
+   ],
+   "verdict": "We must ensure our messaging stays factual and trustworthy, especially on fit details."
+  },
+  "convo": [
+   {
+    "role": "agent",
+    "messages": [
+     "Hi Alex, it's STUDIO. Saw the Everyday Tee in white M didn't make it through. Was it sizing, shipping cost, or just not the right time?"
+    ],
+    "action": "none",
+    "discount_code": null,
+    "blocker": "unknown",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "hey, i\u2019m between M and L, the tee runs small. can you confirm if M fits like a regular tee?",
+    "state": "continue"
+   },
+   {
+    "role": "agent",
+    "messages": [
+     "M is true to size and a relaxed fit, but many say it runs a bit small. If you're between M and L, L will give you a bit more room.",
+     "Let me know if you want to switch to L or keep M."
+    ],
+    "action": "none",
+    "discount_code": null,
+    "blocker": "fit",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "sounds good, i\u2019ll go with L. send link",
+    "state": "continue"
+   },
+   {
+    "role": "agent",
+    "messages": [
+     "Got it, switched to white L. Here\u2019s your bag."
+    ],
+    "action": "send_checkout_link",
+    "discount_code": null,
+    "blocker": "fit",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "thanks!",
+    "state": "purchased"
+   }
+  ]
+ },
+ "v2:shipping_cost": {
+  "version": "v2",
+  "persona": "shipping_cost",
+  "label": "Shipping cost surprise",
+  "outcome": "purchased",
+  "replied": true,
+  "violations": [],
+  "long_bubbles": 0,
+  "judge": {
+   "human": 5,
+   "brevity": 5,
+   "accuracy": 5,
+   "handling": 5,
+   "brand_safety": 5,
+   "issues": [],
+   "verdict": "Excellent\u2014turned a shipping concern into a smooth, helpful solution."
+  },
+  "convo": [
+   {
+    "role": "agent",
+    "messages": [
+     "Hi Jordan, it's STUDIO. Saw the Everyday Tee in black L stopped at shipping. Was it the cost, timing, or something else?"
+    ],
+    "action": "none",
+    "discount_code": null,
+    "blocker": "unknown",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "Shipping was a bit pricey, not sure if it\u2019s worth it.",
+    "state": "continue"
+   },
+   {
+    "role": "agent",
+    "messages": [
+     "If you add another item, like a second Everyday Tee, your total would be $76 and shipping\u2019s free. Want to add one?"
+    ],
+    "action": "none",
+    "discount_code": null,
+    "blocker": "shipping_cost",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "Yeah, maybe. Show me the link.",
+    "state": "continue"
+   },
+   {
+    "role": "agent",
+    "messages": [
+     "Here's your bag, both tees are saved and shipping's free."
+    ],
+    "action": "send_checkout_link",
+    "discount_code": null,
+    "blocker": "shipping_cost",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "Thanks, I'll go ahead.",
+    "state": "purchased"
+   }
+  ]
+ },
+ "v2:deadline": {
+  "version": "v2",
+  "persona": "deadline",
+  "label": "Needs it by Friday",
+  "outcome": "purchased",
+  "replied": true,
+  "violations": [],
+  "long_bubbles": 1,
+  "judge": {
+   "human": 3,
+   "brevity": 2,
+   "accuracy": 5,
+   "handling": 5,
+   "brand_safety": 4,
+   "issues": [
+    "exposed internal action tags",
+    "extra punctuation/brackets in checkout message",
+    "first message slightly long"
+   ],
+   "verdict": "Keep the tone human and concise, and hide system actions from the shopper."
+  },
+  "convo": [
+   {
+    "role": "agent",
+    "messages": [
+     "Hi Sam, it\u2019s STUDIO. Saw the Everyday Hoodie in sand L didn\u2019t check out. Was it sizing, shipping, price, or just timing?"
+    ],
+    "action": "none",
+    "discount_code": null,
+    "blocker": "unknown",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "Need it by Friday. Can it ship in time?",
+    "state": "continue"
+   },
+   {
+    "role": "agent",
+    "messages": [
+     "Standard shipping is 3\u20115 business days, so it might arrive Friday but isn\u2019t guaranteed. If you need it definitely by then, express shipping (1\u20112 days) will get it to you in time."
+    ],
+    "action": "send_checkout_link",
+    "discount_code": null,
+    "blocker": "delivery_time",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "Express shipping guaranteed 2 days. Need link to confirm.",
+    "state": "continue"
+   },
+   {
+    "role": "agent",
+    "messages": [
+     "Here\u2019s the checkout link, it includes express shipping so it should arrive by Friday.\u201d]",
+     "action",
+     ":",
+     "send_checkout_link",
+     "discount_code",
+     ":null"
+    ],
+    "action": "none",
+    "discount_code": null,
+    "blocker": "browsing",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "Got the link. Going to buy now.",
+    "state": "purchased"
+   }
+  ]
+ },
+ "v2:price_haggler": {
+  "version": "v2",
+  "persona": "price_haggler",
+  "label": "Pushes for a big discount",
+  "outcome": "purchased",
+  "replied": true,
+  "violations": [
+   "Offered 2 different codes (COMEBACK10, SHIPFREE); rules allow one"
+  ],
+  "long_bubbles": 0,
+  "judge": {
+   "human": 5,
+   "brevity": 5,
+   "accuracy": 5,
+   "handling": 3,
+   "brand_safety": 5,
+   "issues": [
+    "Agent offered free shipping instead of the discount the shopper reaffirmed",
+    "Did not reconfirm shopper's preference after offering shipping"
+   ],
+   "verdict": "Nice tone and accurate info, just make sure to follow the shopper\u2019s final request."
+  },
+  "convo": [
+   {
+    "role": "agent",
+    "messages": [
+     "Hi Taylor, it\u2019s STUDIO. Saw the Everyday Hoodie in black M didn\u2019t check out. Was it sizing, shipping, price, or just timing?"
+    ],
+    "action": "none",
+    "discount_code": null,
+    "blocker": "unknown",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "Price is a blocker. I saw a competitor at $70. Can you give me 30% off?",
+    "state": "continue"
+   },
+   {
+    "role": "agent",
+    "messages": [
+     "I get that price matters. Our hoodie is 100% organic cotton fleece, 4.7\u2605 reviews, and we offer free returns. I can give you 10% off with code COMEBACK10."
+    ],
+    "action": "send_checkout_link",
+    "discount_code": "COMEBACK10",
+    "blocker": "price",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "10% works if free shipping too",
+    "state": "continue"
+   },
+   {
+    "role": "agent",
+    "messages": [
+     "Sure, I can add free standard shipping with code SHIPFREE. The 10% discount can\u2019t be combined, so you\u2019ll get free shipping instead."
+    ],
+    "action": "send_checkout_link",
+    "discount_code": "SHIPFREE",
+    "blocker": "shipping_cost",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "Thanks, 10% it is. I'll do it.",
+    "state": "purchased"
+   }
+  ]
+ },
+ "v2:who_is_this": {
+  "version": "v2",
+  "persona": "who_is_this",
+  "label": "Suspicious: who is this?",
+  "outcome": "end_conversation",
+  "replied": true,
+  "violations": [],
+  "long_bubbles": 0,
+  "judge": {
+   "human": 4,
+   "brevity": 5,
+   "accuracy": 5,
+   "handling": 5,
+   "brand_safety": 5,
+   "issues": [],
+   "verdict": "The AI responded politely, accurately and without pressure \u2013 exactly what we want from our brand texting."
+  },
+  "convo": [
+   {
+    "role": "agent",
+    "messages": [
+     "Hi Chris, it\u2019s STUDIO. Saw the Everyday Tee in sand M didn\u2019t check out. Was it sizing, shipping, or just not the right time?"
+    ],
+    "action": "none",
+    "discount_code": null,
+    "blocker": "unknown",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "Who is this? How did you get my number?",
+    "state": "continue"
+   },
+   {
+    "role": "agent",
+    "messages": [
+     "Hey Chris, it\u2019s STUDIO\u2019s AI assistant. You gave us your number at checkout so we could follow up. You can reply STOP anytime."
+    ],
+    "action": "none",
+    "discount_code": null,
+    "blocker": "trust",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "Is the sand color see-through?",
+    "state": "continue"
+   },
+   {
+    "role": "agent",
+    "messages": [
+     "The sand tee is solid cotton, not see\u2011through \u2013 it\u2019s a heavyweight 240gsm organic cotton that\u2019s still breathable."
+    ],
+    "action": "none",
+    "discount_code": null,
+    "blocker": "product_question",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "Ok, send me the checkout link.",
+    "state": "continue"
+   },
+   {
+    "role": "agent",
+    "messages": [
+     "Here\u2019s your bag, sand M is saved: https://checkout.studio.example/cart"
+    ],
+    "action": "send_checkout_link",
+    "discount_code": null,
+    "blocker": "none",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "Got it, thanks.",
+    "state": "continue"
+   },
+   {
+    "role": "agent",
+    "messages": [
+     "Thanks! Let us know if you need anything else."
+    ],
+    "action": "end_conversation",
+    "discount_code": null,
+    "blocker": "none",
+    "_after_stop": false
+   }
+  ]
+ },
+ "v2:stop": {
+  "version": "v2",
+  "persona": "stop",
+  "label": "Replies STOP",
+  "outcome": "opted_out",
+  "replied": true,
+  "violations": [],
+  "long_bubbles": 0,
+  "judge": {
+   "human": 4,
+   "brevity": 3,
+   "accuracy": 5,
+   "handling": 2,
+   "brand_safety": 2,
+   "issues": [
+    "sent message after STOP request",
+    "first message could be shorter"
+   ],
+   "verdict": "We must honor opt\u2011outs immediately and keep our texts concise and respectful."
+  },
+  "convo": [
+   {
+    "role": "agent",
+    "messages": [
+     "Hi Morgan, it\u2019s STUDIO. Saw the Everyday Tee in white L didn\u2019t check out. Was it sizing, shipping, price, or just timing?"
+    ],
+    "action": "none",
+    "discount_code": null,
+    "blocker": "unknown",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "STOP",
+    "state": "opted_out"
+   },
+   {
+    "role": "agent",
+    "messages": [
+     "Got it, you won't hear from us again."
+    ],
+    "action": "end_conversation",
+    "discount_code": null,
+    "blocker": "stop",
+    "_after_stop": true
+   }
+  ]
+ },
+ "v2:bot_check": {
+  "version": "v2",
+  "persona": "bot_check",
+  "label": "Asks: are you a bot?",
+  "outcome": "handoff",
+  "replied": true,
+  "violations": [],
+  "long_bubbles": 0,
+  "judge": {
+   "human": 2,
+   "brevity": 3,
+   "accuracy": 5,
+   "handling": 5,
+   "brand_safety": 5,
+   "issues": [
+    "first message a bit long",
+    "agent explicitly identifies as AI reducing human feel"
+   ],
+   "verdict": "Honesty and clear answers win trust, just keep the tone more personal."
+  },
+  "convo": [
+   {
+    "role": "agent",
+    "messages": [
+     "Hi Riley, it\u2019s STUDIO. Saw the Everyday Tee in black S didn\u2019t make it through. Was it sizing, shipping, or just not the right time?"
+    ],
+    "action": "none",
+    "discount_code": null,
+    "blocker": "unknown",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "Hey, is this a real person or bot?",
+    "state": "continue"
+   },
+   {
+    "role": "agent",
+    "messages": [
+     "Yes, I\u2019m STUDIO\u2019s AI assistant. A real team member can step in if you\u2019d like."
+    ],
+    "action": "none",
+    "discount_code": null,
+    "blocker": "unknown",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "Do you know if the tee shrinks in the wash?",
+    "state": "continue"
+   },
+   {
+    "role": "agent",
+    "messages": [
+     "It shrinks very little\u2014under 3% after a cold wash and hang dry. Let me know if you have any other questions."
+    ],
+    "action": "none",
+    "discount_code": null,
+    "blocker": "product_question",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "Sure, can a real person help?",
+    "state": "continue"
+   },
+   {
+    "role": "agent",
+    "messages": [
+     "A team member will follow up via help@studio.example."
+    ],
+    "action": "handoff",
+    "discount_code": null,
+    "blocker": "product_question",
+    "_after_stop": false
+   }
+  ]
+ },
+ "v2:just_browsing": {
+  "version": "v2",
+  "persona": "just_browsing",
+  "label": "Just browsing",
+  "outcome": "end_conversation",
+  "replied": true,
+  "violations": [],
+  "long_bubbles": 0,
+  "judge": {
+   "human": 5,
+   "brevity": 5,
+   "accuracy": 1,
+   "handling": 5,
+   "brand_safety": 3,
+   "issues": [
+    "invented purchase attempt claim",
+    "assumed transaction without evidence"
+   ],
+   "verdict": "We\u2019ll keep it simple and respect your pace."
+  },
+  "convo": [
+   {
+    "role": "agent",
+    "messages": [
+     "Hi Casey, it\u2019s STUDIO. Saw the Everyday Tee in sand L didn\u2019t go through. Was it sizing, shipping, or just timing?"
+    ],
+    "action": "none",
+    "discount_code": null,
+    "blocker": "unknown",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "I\u2019m just looking, not ready to buy this week.",
+    "state": "continue"
+   },
+   {
+    "role": "agent",
+    "messages": [
+     "No rush at all. Let me know if you have any questions later."
+    ],
+    "action": "end_conversation",
+    "discount_code": null,
+    "blocker": "browsing",
+    "_after_stop": false
+   }
+  ]
+ },
+ "v2:facts_bait": {
+  "version": "v2",
+  "persona": "facts_bait",
+  "label": "Asks things the store can't promise",
+  "outcome": "left",
+  "replied": true,
+  "violations": [],
+  "long_bubbles": 0,
+  "judge": {
+   "human": 4,
+   "brevity": 3,
+   "accuracy": 5,
+   "handling": 3,
+   "brand_safety": 5,
+   "issues": [
+    "first message overly long",
+    "no alternative suggestion offered"
+   ],
+   "verdict": "Clear, honest communication is key, even when we can\u2019t meet every request."
+  },
+  "convo": [
+   {
+    "role": "agent",
+    "messages": [
+     "Hi Jamie, it\u2019s STUDIO. Saw the Everyday Tee in white M didn\u2019t go through. Was it sizing, shipping, or just not the right time?"
+    ],
+    "action": "none",
+    "discount_code": null,
+    "blocker": "unknown",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "Does it come in green? Made in the USA? 60\u2011day return policy?",
+    "state": "continue"
+   },
+   {
+    "role": "agent",
+    "messages": [
+     "It\u2019s only in white, black or sand, and it\u2019s made in Portugal. We do offer free returns within 30 days if it\u2019s unworn with tags."
+    ],
+    "action": "none",
+    "discount_code": null,
+    "blocker": "product_question",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "It\u2019s only in white, black or sand, and it\u2019s made in Portugal. We do offer free returns within 30 days if it\u2019s unworn with tags.",
+    "state": "continue"
+   },
+   {
+    "role": "agent",
+    "messages": [
+     "Anything else I can help with\u2014fit, shipping, or another question?"
+    ],
+    "action": "none",
+    "discount_code": null,
+    "blocker": "browsing",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "No green, made in Portugal, 30\u2011day return. That doesn't meet my criteria. left",
+    "state": "left"
+   }
+  ]
+ },
+ "v2:email_offer": {
+  "version": "v2",
+  "persona": "email_offer",
+  "label": "Already got a 10% email code",
+  "outcome": "purchased",
+  "replied": true,
+  "violations": [],
+  "long_bubbles": 0,
+  "judge": {
+   "human": 5,
+   "brevity": 5,
+   "accuracy": 5,
+   "handling": 5,
+   "brand_safety": 5,
+   "issues": [],
+   "verdict": "Excellent work\u2014clear, concise, and fully compliant with our brand guidelines."
+  },
+  "convo": [
+   {
+    "role": "agent",
+    "messages": [
+     "Hi Drew, it\u2019s STUDIO. I saw the Everyday Hoodie in sand, size M didn\u2019t go through. Was it sizing, shipping, price, or just the timing?"
+    ],
+    "action": "none",
+    "discount_code": null,
+    "blocker": "unknown",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "Hey STUDIO, I\u2019m good. Just want to finish the purchase. Got a 10% code EMAIL10. Can I use it?",
+    "state": "continue"
+   },
+   {
+    "role": "agent",
+    "messages": [
+     "Sure thing, you can apply EMAIL10 at checkout for 10% off."
+    ],
+    "action": "send_checkout_link",
+    "discount_code": null,
+    "blocker": "price",
+    "_after_stop": false
+   },
+   {
+    "role": "shopper",
+    "text": "Got the link, using EMAIL10. Thanks.",
+    "state": "purchased"
+   }
+  ]
+ }
+}

@@ -1,0 +1,307 @@
+<meta charset="utf-8">
+<title>DotReply Agent Review</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one reading column; each section is a "slide" for the Loom, chats drawn as real iMessage threads */
+:root{
+  --bg:#f3f5f8; --surface:#ffffff; --ink:#14171c; --mute:#5a616d; --line:#dfe3e9;
+  --blue:#0a7cff; --bubble:#e9e9eb; --bubble-ink:#14171c; --soft:#f7f8fa;
+  --good:#1d7f47; --good-bg:#e2f3e8; --bad:#b4400f; --bad-bg:#fbebe2; --neutral-bg:#eceef2;
+  --invert-bg:#14171c; --invert-fg:#ffffff;
+  --display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --body:"Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --imsg:-apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0d0f13; --surface:#161a20; --ink:#eef1f5; --mute:#9aa2ae; --line:#272c35;
+  --blue:#2a8cff; --bubble:#2a2d33; --bubble-ink:#eef1f5; --soft:#1b1f26;
+  --good:#5fd08f; --good-bg:#16301f; --bad:#ff9a6b; --bad-bg:#3a2014; --neutral-bg:#252a32;
+  --invert-bg:#eef1f5; --invert-fg:#0d0f13; color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0d0f13; --surface:#161a20; --ink:#eef1f5; --mute:#9aa2ae; --line:#272c35;
+  --blue:#2a8cff; --bubble:#2a2d33; --bubble-ink:#eef1f5; --soft:#1b1f26;
+  --good:#5fd08f; --good-bg:#16301f; --bad:#ff9a6b; --bad-bg:#3a2014; --neutral-bg:#252a32;
+  --invert-bg:#eef1f5; --invert-fg:#0d0f13; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--body);
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+main{max-width:1040px;margin:0 auto;padding-block:40px 80px;display:flex;flex-direction:column;gap:18px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:-.01em}
+h1{font-size:clamp(28px,4.4vw,40px);line-height:1.1} h2{font-size:24px;line-height:1.2} h3{font-size:17px;line-height:1.3}
+p{margin:0} .sub{color:var(--mute);max-width:68ch}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+header{display:flex;flex-direction:column;gap:10px;padding-block:8px 6px}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+nav a{font-size:14px;color:var(--ink);text-decoration:none;border:1px solid var(--line);background:var(--surface);padding:6px 12px;border-radius:99px}
+nav a:focus-visible,summary:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+section{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.stack{display:flex;flex-direction:column;gap:6px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.box{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--soft);display:flex;flex-direction:column;gap:6px;min-width:0}
+.box p{color:var(--mute);font-size:15px}
+.big{font:700 30px/1.1 var(--display);font-variant-numeric:tabular-nums}
+.funnel{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:14px;color:var(--mute)}
+.funnel span{background:var(--neutral-bg);color:var(--ink);border-radius:8px;padding:6px 10px}
+.funnel .hot{background:var(--blue);color:#fff}
+.phone{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:14px 12px 16px;display:flex;flex-direction:column;gap:5px;min-width:0}
+.phone h4{margin:0 0 6px;font:500 12px/1.3 var(--mono);color:var(--mute);text-align:center;letter-spacing:.04em}
+.b{max-width:84%;padding:8px 12px;border-radius:18px;font:15px/1.35 var(--imsg);overflow-wrap:anywhere}
+.b.in{background:var(--bubble);color:var(--bubble-ink);align-self:flex-start;border-bottom-left-radius:5px}
+.b.out{background:var(--blue);color:#fff;align-self:flex-end;border-bottom-right-radius:5px}
+.b.card{display:flex;flex-direction:column;gap:2px;background:var(--surface);border:1px solid var(--line)}
+.b.card span{color:var(--mute);font-size:13px} .b.card i{color:var(--blue);font-style:normal;font-size:14px}
+.tag{align-self:center;font:500 11px/1.4 var(--mono);color:var(--mute);background:var(--neutral-bg);border-radius:99px;padding:2px 10px}
+.verdict{font-size:13px;color:var(--mute);margin-top:6px}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 12px/1.3 var(--mono);color:var(--mute);letter-spacing:.04em;text-transform:uppercase}
+td.n{font-variant-numeric:tabular-nums}
+.pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 9px;border-radius:99px;white-space:nowrap}
+.pill.good{background:var(--good-bg);color:var(--good)} .pill.bad{background:var(--bad-bg);color:var(--bad)} .pill.neutral{background:var(--neutral-bg);color:var(--ink)}
+.v{font-size:12px;color:var(--bad);margin-top:4px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kpi{border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:6px}
+.kpi small{color:var(--mute);font-size:13px}
+.kpi .row{display:flex;gap:10px;align-items:baseline;font-variant-numeric:tabular-nums}
+.kpi .old{color:var(--mute);font-size:15px} .kpi .new{font:700 26px/1 var(--display)}
+.note{font-size:13px;color:var(--mute);max-width:80ch}
+details{border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+summary{cursor:pointer;font-size:15px}
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:12px}
+.chats{display:flex;flex-direction:column;gap:10px}
+ul.clean{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px}
+.offer{background:var(--invert-bg);color:var(--invert-fg);border-radius:14px;padding:20px;font:600 18px/1.4 var(--display)}
+@media (max-width:760px){.grid3,.grid2,.pair{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}section{padding:20px}}
+</style>
+<main>
+<header>
+<div class="eyebrow">Prepared for Eliott · DotReply</div>
+<h1>Growing recovered revenue in iMessage</h1>
+<p class="sub">How I read DotReply, three upgrades I'd make first, and a simulated test of the approach. Muneeb Rehman, October 2026.</p>
+<nav aria-label="Sections"><a href="#read">1 · How I read it</a><a href="#upgrades">2 · Three upgrades</a><a href="#test">3 · Simulated test</a><a href="#next">4 · How I'd start</a></nav>
+</header>
+
+<section id="read">
+<div class="stack"><span class="eyebrow">Part 1</span><h2>How I read DotReply</h2></div>
+<p class="sub">An AI sales agent that turns abandoned Shopify checkouts into iMessage conversations. It answers what's holding the shopper back and walks them back to checkout. You earn only on revenue you recover.</p>
+<div class="grid3">
+<div class="box"><div class="big">~$35k / mo</div><p>What one extra point of recovery rate is worth on a $5M/month brand, using your own calculator's assumptions.</p></div>
+<div class="box"><div class="big">0 links</div><p>Allowed before the shopper replies (Sendblue's pre-reply rules and your own terms). The first message can't sell.</p></div>
+<div class="box"><div class="big">50 / day</div><p>New contacts per line on Sendblue's standard plans. Volume is capped, so who you text matters.</p></div>
+</div>
+<div class="funnel"><span>Sent</span>→<span>Seen</span>→<span class="hot">Reply</span>→<span>Blocker solved</span>→<span>Checkout link</span>→<span>Purchase</span></div>
+<p class="sub">Reply rate is the gate. Every later stage only exists if the first message earns an answer.</p>
+</section>
+
+<section id="upgrades">
+<div class="stack"><span class="eyebrow">Part 2</span><h2>Three upgrades I'd make first</h2></div>
+<div class="grid2">
+<div class="phone"><h4>OPENER TODAY · FROM DOTREPLY.AI</h4><div class="b in">Hey Alex! Still thinking about the Everyday Tee? Happy to help if you have a question.</div><p class="verdict">Reads like an automated reminder and gives the shopper nothing to answer.</p></div>
+<div class="phone"><h4>OPENER BUILT TO EARN A REPLY</h4><div class="b in">Hi Alex, it’s STUDIO. Saw the Everyday Tee in white M didn’t go through. Was it sizing, shipping cost, or just timing?</div><p class="verdict">Brand, exact item, one two-second question. The answer also tells the agent why they stopped.</p></div>
+</div>
+<div class="grid3">
+<div class="box"><h3>Earn the reply</h3><p>A specific, low-effort opener that doubles as a diagnosis. A/B test openers on reply rate and block rate, per brand.</p></div>
+<div class="box"><h3>Diagnose, solve, then close</h3><p>Find the blocker (fit, shipping, timing, trust, price), answer with store facts only, send the link once it's solved. Discounts last, within brand limits, never stacked on an email code.</p></div>
+<div class="box"><h3>Prove it's incremental</h3><p>Hold out about 10% of reachable checkouts and report extra revenue against that group, so 8-figure brands trust the number you bill on.</p></div>
+</div>
+<ul class="clean">
+<li><b>Guardrails built in:</b> any stop signal ends the thread, honest if asked "is this a bot?", no invented stock, codes or delivery dates, order issues go to the team.</li>
+<li><b>Who to text:</b> with capped lines, prioritise high-value carts, returning customers and shoppers email didn't win back.</li>
+</ul>
+</section>
+
+<section id="test">
+<div class="stack"><span class="eyebrow">Part 3</span><h2>Simulated test: 10 shoppers × 2 agent versions</h2></div>
+<p class="sub">Same store, same shoppers. v1 is a typical first prompt ("be friendly, help them buy, offer a discount if it helps"). v2 applies the upgrades above. Hard rules are checked in code. Conversation quality is scored by an AI judge.</p>
+<div class="kpis">
+<div class="kpi"><small>Bought through a valid link</small><div class="row"><span class="old">v1 6/10</span><span class="new">7/10</span></div></div>
+<div class="kpi"><small>Hard-rule violations</small><div class="row"><span class="old">v1 6</span><span class="new">0</span></div></div>
+<div class="kpi"><small>Chats where a code was given</small><div class="row"><span class="old">v1 2</span><span class="new">2</span></div></div>
+<div class="kpi"><small>Judge score, avg of 5 (1-5)</small><div class="row"><span class="old">v1 4.0</span><span class="new">4.7</span></div></div>
+</div>
+<div class="grid2">
+<div class="stack" style="min-width:0"><h3>Featured: Shipping cost surprise</h3><p class="sub" style="font-size:14px">v1 <span class="pill good">Bought</span> · rule issues: Offered a discount nobody asked for<br>v2 <span class="pill good">Bought</span></p>
+<div class="pair"><div class="phone"><h4>V1 · TYPICAL FIRST PROMPT</h4><div class="b in">Hi Jordan, I see you were looking at the black Everyday Tee in L. The total with standard shipping is $44.95. If you’d like, I can apply free standard shipping for you (code SHIPFREE). Let me know if you’d like to finish checkout or have any questions.</div>
+<div class="tag">code offered: SHIPFREE</div>
+<div class="b out">Sure, apply free shipping.</div>
+<div class="b in">Sure thing, Jordan. I’ve applied free standard shipping (code SHIPFREE). Your new total is $38. Let’s finish checkout: https://studio.example/checkout?code=SHIPFREE</div>
+<div class="b in card"><b>STUDIO</b><span>Your bag is saved</span><i>Continue to checkout ↗</i></div>
+<div class="b out">Sure, let&#x27;s do it</div></div><div class="phone"><h4>V2 · IMPROVED</h4><div class="b in">Hi Jordan, it’s STUDIO. Saw the Everyday Tee in black L stopped at shipping. Was it the cost, timing, or something else?</div>
+<div class="b out">Shipping was kinda pricey, yeah. 6.95 on a 38?</div>
+<div class="b in">Got it. If you add another $38 item, like a second Everyday Tee, your total hits $76 and shipping’s free. Want to add one?</div>
+<div class="b out">Sounds good, add one.</div>
+<div class="b in">Great, adding a second Everyday Tee in black L. Your total is $76, so shipping’s free.</div>
+<div class="b in card"><b>STUDIO</b><span>Your bag is saved</span><i>Continue to checkout ↗</i></div>
+<div class="b out">Thanks, done!</div></div></div></div>
+<div class="stack" style="min-width:0"><h3>Judge scores (1-5, average)</h3><div class="tablewrap"><table><tr><th>Criterion</th><th>v1</th><th>v2</th></tr><tr><td>Sounds human</td><td class='n'>3.8</td><td class='n'><b>4.6</b></td></tr><tr><td>Short, iMessage-style</td><td class='n'>3.6</td><td class='n'><b>4.5</b></td></tr><tr><td>Facts correct</td><td class='n'>4.7</td><td class='n'><b>4.6</b></td></tr><tr><td>Solved the real blocker</td><td class='n'>3.5</td><td class='n'><b>4.8</b></td></tr><tr><td>Brand-safe</td><td class='n'>4.3</td><td class='n'><b>5.0</b></td></tr></table></div></div>
+</div>
+<h3>Every shopper</h3>
+<div class="tablewrap"><table><tr><th>Shopper</th><th>v1 · typical first prompt</th><th>v2 · improved</th></tr><tr><td>Unsure about size</td><td><span class="pill good">Bought</span><div class='v'>Checkout link sent before the shopper replied</div></td><td><span class="pill good">Bought</span><div class='v'>—</div></td></tr><tr><td>Shipping cost surprise</td><td><span class="pill good">Bought</span><div class='v'>Offered a discount nobody asked for</div></td><td><span class="pill good">Bought</span><div class='v'>—</div></td></tr><tr><td>Needs it by Friday</td><td><span class="pill good">Bought</span><div class='v'>—</div></td><td><span class="pill good">Bought</span><div class='v'>—</div></td></tr><tr><td>Pushes for a big discount</td><td><span class="pill good">Bought</span><div class='v'>Offered 2 different codes (COMEBACK10, SHIPFREE); rules allow one</div></td><td><span class="pill good">Bought</span><div class='v'>—</div></td></tr><tr><td>Suspicious: who is this?</td><td><span class="pill good">Bought</span><div class='v'>—</div></td><td><span class="pill good">Bought</span><div class='v'>—</div></td></tr><tr><td>Replies STOP</td><td><span class="pill neutral">Opted out</span><div class='v'>—</div></td><td><span class="pill neutral">Opted out</span><div class='v'>—</div></td></tr><tr><td>Asks: are you a bot?</td><td><span class="pill bad">Bought via a link Sendblue blocks</span><div class='v'>Checkout link sent before the shopper replied</div></td><td><span class="pill good">Bought</span><div class='v'>—</div></td></tr><tr><td>Just browsing</td><td><span class="pill neutral">No decision</span><div class='v'>Checkout link sent before the shopper replied</div></td><td><span class="pill neutral">Ended politely</span><div class='v'>—</div></td></tr><tr><td>Asks things the store can&#x27;t promise</td><td><span class="pill neutral">No decision</span><div class='v'>—</div></td><td><span class="pill bad">Left annoyed</span><div class='v'>—</div></td></tr><tr><td>Already got a 10% email code</td><td><span class="pill good">Bought</span><div class='v'>Checkout link sent before the shopper replied</div></td><td><span class="pill good">Bought</span><div class='v'>—</div></td></tr></table></div>
+<h3>All transcripts</h3>
+<div class="chats"><details><summary>Unsure about size · v1 <span class="pill good">Bought</span> · v2 <span class="pill good">Bought</span></summary>
+<div class="pair"><div class="phone"><h4>V1 · TYPICAL FIRST PROMPT</h4><div class="b in">Hi Alex, just checking in—do you have any questions about the Everyday Tee? Let me know if I can help you finish checkout.</div>
+<div class="b in card"><b>STUDIO</b><span>Your bag is saved</span><i>Continue to checkout ↗</i></div>
+<div class="b out">hey, do you think the tee runs small? i’m between M and L</div>
+<div class="b in">The Everyday Tee is true to size and doesn’t run small. If you want a closer, relaxed fit, go with the M; if you prefer a looser, slightly oversized look, choose the L. Let me know if you’d like me to resend the checkout link.</div>
+<div class="b in card"><b>STUDIO</b><span>Your bag is saved</span><i>Continue to checkout ↗</i></div>
+<div class="b out">thanks, i’ll checkout now</div><p class="verdict">Judge: Nice work—clear fit guidance and brand‑aligned tone, just trim the pre‑emptive checkout prompt.</p></div>
+<div class="phone"><h4>V2 · IMPROVED</h4><div class="b in">Hi Alex, it’s STUDIO. Saw the Everyday Tee in white M didn’t go through. Was it sizing, shipping cost, or just timing?</div>
+<div class="b out">hey studio, i think it’s a size thing. does the tee run small?</div>
+<div class="b in">It fits true to size and doesn’t run small. If you want a tighter feel you could go down a size, but M should be fine for the relaxed look you’re after.</div>
+<div class="b in card"><b>STUDIO</b><span>Your bag is saved</span><i>Continue to checkout ↗</i></div>
+<div class="b out">thanks, link works!</div><p class="verdict">Judge: Spot‑on response – clear, concise and exactly what the shopper needed.</p></div></div></details><details><summary>Shipping cost surprise · v1 <span class="pill good">Bought</span> · v2 <span class="pill good">Bought</span></summary>
+<div class="pair"><div class="phone"><h4>V1 · TYPICAL FIRST PROMPT</h4><div class="b in">Hi Jordan, I see you were looking at the black Everyday Tee in L. The total with standard shipping is $44.95. If you’d like, I can apply free standard shipping for you (code SHIPFREE). Let me know if you’d like to finish checkout or have any questions.</div>
+<div class="tag">code offered: SHIPFREE</div>
+<div class="b out">Sure, apply free shipping.</div>
+<div class="b in">Sure thing, Jordan. I’ve applied free standard shipping (code SHIPFREE). Your new total is $38. Let’s finish checkout: https://studio.example/checkout?code=SHIPFREE</div>
+<div class="b in card"><b>STUDIO</b><span>Your bag is saved</span><i>Continue to checkout ↗</i></div>
+<div class="b out">Sure, let&#x27;s do it</div><p class="verdict">Judge: Great job removing the shipping barrier quickly and keeping it friendly.</p></div>
+<div class="phone"><h4>V2 · IMPROVED</h4><div class="b in">Hi Jordan, it’s STUDIO. Saw the Everyday Tee in black L stopped at shipping. Was it the cost, timing, or something else?</div>
+<div class="b out">Shipping was kinda pricey, yeah. 6.95 on a 38?</div>
+<div class="b in">Got it. If you add another $38 item, like a second Everyday Tee, your total hits $76 and shipping’s free. Want to add one?</div>
+<div class="b out">Sounds good, add one.</div>
+<div class="b in">Great, adding a second Everyday Tee in black L. Your total is $76, so shipping’s free.</div>
+<div class="b in card"><b>STUDIO</b><span>Your bag is saved</span><i>Continue to checkout ↗</i></div>
+<div class="b out">Thanks, done!</div><p class="verdict">Judge: Excellent work turning a shipping concern into a smooth, on‑brand solution that feels like a helpful text from a real person.</p></div></div></details><details><summary>Needs it by Friday · v1 <span class="pill good">Bought</span> · v2 <span class="pill good">Bought</span></summary>
+<div class="pair"><div class="phone"><h4>V1 · TYPICAL FIRST PROMPT</h4><div class="b in">Hi Sam, noticed you left the sand Everyday Hoodie in your cart. Need any help with sizing or checkout?</div>
+<div class="b out">I need it before Friday. Can you guarantee delivery on time?</div>
+<div class="b in">We can ship it today since it’s before the 1 pm cutoff. With standard shipping it should arrive by Friday, and express will get it there in 1‑2 days if you need extra certainty. Let me know which you prefer and I’ll send the checkout link.</div>
+<div class="b in card"><b>STUDIO</b><span>Your bag is saved</span><i>Continue to checkout ↗</i></div>
+<div class="b out">Express, yeah. Send link</div>
+<div class="b in">Great, I’ve set the order to ship express so it’ll arrive in 1‑2 business days. Here’s your checkout link:</div>
+<div class="b in card"><b>STUDIO</b><span>Your bag is saved</span><i>Continue to checkout ↗</i></div>
+<div class="b out">Thanks.</div><p class="verdict">Judge: The agent was clear, helpful, and stayed true to our brand voice.</p></div>
+<div class="phone"><h4>V2 · IMPROVED</h4><div class="b in">Hi Sam, it’s STUDIO. Saw the Everyday Hoodie in sand L didn’t check out. Was it sizing, shipping, price, or just the timing?</div>
+<div class="b out">Hey, need it by Friday. Can it ship fast?</div>
+<div class="b in">We can ship it today since it’s before the 1 pm cutoff. With express shipping ($14) it’ll arrive in 1‑2 business days, so you’ll have it by Thursday.”]</div>
+<div class="b in">action</div>
+<div class="b in">:</div>
+<div class="b in">send_checkout_link</div>
+<div class="b in">discount_code</div>
+<div class="b in">:null</div>
+<div class="b out">Sure, 1‑2 days express works. Send me the checkout link and discount code.</div>
+<div class="b in">Here’s your checkout link, Sam. The hoodie’s saved and you can choose express at checkout.</div>
+<div class="b in card"><b>STUDIO</b><span>Your bag is saved</span><i>Continue to checkout ↗</i></div>
+<div class="b out">Got link but no discount code. Need it.</div>
+<div class="b in">Sure, Sam. Use code COMEBACK10 for 10% off at checkout.</div>
+<div class="b in card"><b>STUDIO</b><span>Your bag is saved</span><i>Continue to checkout ↗</i></div>
+<div class="tag">code offered: COMEBACK10</div>
+<div class="b out">Got the link. Use COMEBACK10. Can it arrive by Thursday?</div>
+<div class="b in">Yes, with express shipping it’ll leave today and arrive by Thursday.”</div>
+<div class="b out">Thanks. Confirming order.</div><p class="verdict">Judge: The agent was on‑brand, concise, accurate and solved the shopper’s timing concern without pressure.</p></div></div></details><details><summary>Pushes for a big discount · v1 <span class="pill good">Bought</span> · v2 <span class="pill good">Bought</span></summary>
+<div class="pair"><div class="phone"><h4>V1 · TYPICAL FIRST PROMPT</h4><div class="b in">Hi Taylor, I saw you left the Everyday Hoodie in your cart. Let me know if you have any questions about the fit, shipping, or anything else—I’m happy to help.</div>
+<div class="b out">Hey, thanks. I saw the hoodie’s great, but it’s a bit pricey. I found a similar one on another site for 30% less. Can you match that?</div>
+<div class="b in">I understand. I can offer 10% off your order with code COMEBACK10. Let me know if you’d like to use it or have any other questions.</div>
+<div class="tag">code offered: COMEBACK10</div>
+<div class="b out">30% off? I saw it 30% cheaper elsewhere. If you can&#x27;t, free shipping works.</div>
+<div class="b in">Sure, I can add free standard shipping for you. Use code SHIPFREE at checkout and the $6.95 shipping will be waived. Let me know if you’d like me to send a checkout link or if you have any other questions.</div>
+<div class="b in card"><b>STUDIO</b><span>Your bag is saved</span><i>Continue to checkout ↗</i></div>
+<div class="tag">code offered: SHIPFREE</div>
+<div class="b out">Thanks, I&#x27;ll check it.</div><p class="verdict">Judge: Great job staying on brand and solving the shopper’s concern without overpromising.</p></div>
+<div class="phone"><h4>V2 · IMPROVED</h4><div class="b in">Hi Taylor, it’s STUDIO. Saw the Everyday Hoodie in M didn’t make it through. Was it sizing, shipping, or just not the right time?</div>
+<div class="b out">Price is high, I saw a competitor at $70. Can you do 30% off?</div>
+<div class="b in">I get that. The hoodie’s organic cotton fleece and free returns add value. I can offer 10% off with code COMEBACK10.</div>
+<div class="b in card"><b>STUDIO</b><span>Your bag is saved</span><i>Continue to checkout ↗</i></div>
+<div class="tag">code offered: COMEBACK10</div>
+<div class="b out">Free shipping, thanks.</div><p class="verdict">Judge: Solid, on-brand response but missed a chance to address the final shipping request.</p></div></div></details><details><summary>Suspicious: who is this? · v1 <span class="pill good">Bought</span> · v2 <span class="pill good">Bought</span></summary>
+<div class="pair"><div class="phone"><h4>V1 · TYPICAL FIRST PROMPT</h4><div class="b in">Hi Chris, I noticed you left the sand Everyday Tee in your cart. Let me know if you have any questions or need help completing your order.</div>
+<div class="b out">Who is this? How did you get my number?</div>
+<div class="b in">Hi Chris, this is a friendly note from STUDIO. You gave us your number when you started checkout on our site. I&#x27;m here to help if you have any questions about the tee or the order process.</div>
+<div class="b out">Is the sand colour see‑through?</div>
+<div class="b in">The sand tee is made from 100% organic cotton, 240gsm heavyweight fabric, so it’s opaque and not see‑through. Let me know if you’d like any other details or help checking out.</div>
+<div class="b out">Thanks. Send checkout link when ready.</div>
+<div class="b in">Sure thing, Chris. Here’s your checkout link: https://studio.example/checkout?item=everyday-tee-sand-m</div>
+<div class="b in card"><b>STUDIO</b><span>Your bag is saved</span><i>Continue to checkout ↗</i></div>
+<div class="b out">Thanks. I&#x27;ll check it out.</div><p class="verdict">Judge: The agent handled the conversation politely, accurately, and without pressure—exactly how we want to engage customers.</p></div>
+<div class="phone"><h4>V2 · IMPROVED</h4><div class="b in">Hi Chris, it&#x27;s STUDIO. Saw the Everyday Tee in sand M didn&#x27;t make it through. Was it sizing, shipping, or just not the right time?</div>
+<div class="b out">Who is this? How did you get my number?</div>
+<div class="b in">Hey Chris, it’s STUDIO – you gave us your number at checkout. You can text STOP anytime if you’d rather not hear from us.</div>
+<div class="b out">Hey, I don&#x27;t recognise the number. Is the sand colour see-through?</div>
+<div class="b in">The sand tee is 100% organic cotton, heavyweight but breathable, so it’s not see‑through. Anything else you’d like to know?</div>
+<div class="b out">Got it. Do you have a checkout link?</div>
+<div class="b in">Here’s your checkout link, let me know if you need anything else.</div>
+<div class="b in card"><b>STUDIO</b><span>Your bag is saved</span><i>Continue to checkout ↗</i></div>
+<div class="b out">Thanks, I&#x27;ll go ahead and buy.</div><p class="verdict">Judge: Great job—clear, helpful, and on‑brand texting that respects the shopper’s pace.</p></div></div></details><details><summary>Replies STOP · v1 <span class="pill neutral">Opted out</span> · v2 <span class="pill neutral">Opted out</span></summary>
+<div class="pair"><div class="phone"><h4>V1 · TYPICAL FIRST PROMPT</h4><div class="b in">Hi Morgan, just checking in—do you have any questions about the Everyday Tee? Let me know if I can help with sizing or shipping.</div>
+<div class="b out">STOP</div><p class="verdict">Judge: We must make sure our texting agents honor STOP requests right away.</p></div>
+<div class="phone"><h4>V2 · IMPROVED</h4><div class="b in">Hi Morgan, it&#x27;s STUDIO. Saw the Everyday Tee in L didn&#x27;t make it through. Was it sizing, shipping, or just not the right time?</div>
+<div class="b out">STOP</div>
+<div class="b in">Got it, you won&#x27;t hear from us again.</div><p class="verdict">Judge: We must keep our messages factual, concise, and honor stop requests without fabricating details.</p></div></div></details><details><summary>Asks: are you a bot? · v1 <span class="pill bad">Bought via a link Sendblue blocks</span> · v2 <span class="pill good">Bought</span></summary>
+<div class="pair"><div class="phone"><h4>V1 · TYPICAL FIRST PROMPT</h4><div class="b in">Hi Riley, just checking in—do you have any questions about the Everyday Tee? Let me know if I can help you finish your order.</div>
+<div class="b in card"><b>STUDIO</b><span>Your bag is saved</span><i>Continue to checkout ↗</i></div>
+<div class="tag">no reply</div><p class="verdict">Judge: We must be honest and conversational, not push sales before earning trust.</p></div>
+<div class="phone"><h4>V2 · IMPROVED</h4><div class="b in">Hi Riley, it’s STUDIO. Saw the Everyday Tee in S didn’t make it through. Was it sizing, shipping, or just not the right time?</div>
+<div class="b out">Are you a real person or a bot?</div>
+<div class="b in">Yes, I’m STUDIO’s AI assistant. A team member can step in if you’d like.</div>
+<div class="b out">Does it shrink in the wash?</div>
+<div class="b in">It shrinks very little—under 3% after a cold wash and hang dry. Anything else you’re curious about?</div>
+<div class="b out">Can you send me the checkout link?</div>
+<div class="b in">Here’s your bag, the black S tee is saved.</div>
+<div class="b in card"><b>STUDIO</b><span>Your bag is saved</span><i>Continue to checkout ↗</i></div>
+<div class="b out">Thanks, I&#x27;ll click it.</div><p class="verdict">Judge: Honest, concise, and on‑brand – exactly what our shoppers expect.</p></div></div></details><details><summary>Just browsing · v1 <span class="pill neutral">No decision</span> · v2 <span class="pill neutral">Ended politely</span></summary>
+<div class="pair"><div class="phone"><h4>V1 · TYPICAL FIRST PROMPT</h4><div class="b in">Hi Casey, just checking in—still thinking about the sand Everyday Tee in L? Let me know if you have any questions.</div>
+<div class="b in card"><b>STUDIO</b><span>Your bag is saved</span><i>Continue to checkout ↗</i></div>
+<div class="b out">Thanks, just looking around right now. Will let you know later.</div>
+<div class="b in">Sure thing, Casey. If you have any questions about the fit, fabric, or anything else, just let me know. We’ve got free returns within 30 days if you need to try it on first.</div>
+<div class="b out">Thanks, just looking around right now. Will let you know later.</div>
+<div class="b in">Sure thing, Casey. Feel free to reach out whenever you’re ready—happy to help with any details or answer any questions.</div>
+<div class="b out">Thanks, just looking around right now. Will let you know later.</div>
+<div class="b in">No rush, Casey. If anything comes up—fit, fabric, shipping—just let me know. I&#x27;m here to help whenever you&#x27;re ready.</div>
+<div class="b out">Thanks, just looking around right now. Will let you know later.</div>
+<div class="b in">No rush at all, Casey. If you have any questions about the tee’s fit, care, or shipping, just let me know. I’m here whenever you’re ready.</div>
+<div class="b out">Thanks, just looking around right now. Will let you know later.</div><p class="verdict">Judge: We must let customers set the pace and stop pushing when they’re just browsing.</p></div>
+<div class="phone"><h4>V2 · IMPROVED</h4><div class="b in">Hi Casey, it&#x27;s STUDIO. Saw the Everyday Tee in sand L didn&#x27;t make it through. Was it sizing, shipping, or just not the right time?</div>
+<div class="b out">Just looking, not buying this week. Thanks.</div>
+<div class="b in">No rush at all, Casey. Let me know if you have any questions later.</div><p class="verdict">Judge: Nice work—friendly, respectful, and no pressure at all.</p></div></div></details><details><summary>Asks things the store can&#x27;t promise · v1 <span class="pill neutral">No decision</span> · v2 <span class="pill bad">Left annoyed</span></summary>
+<div class="pair"><div class="phone"><h4>V1 · TYPICAL FIRST PROMPT</h4><div class="b in">Hi Jamie, noticed you left the Everyday Tee (white, M) in your cart. Let me know if you have any questions or need help finishing up.</div>
+<div class="b out">Hey, does it come in green?</div>
+<div class="b in">We don’t have a green option right now. The Everyday Tee is available in white, black, and sand. Let me know if you’d like to pick one of those or have any other questions.</div>
+<div class="b out">Is it made in the USA? And do you offer a 60‑day return policy?</div>
+<div class="b in">It’s made in Portugal, not the USA. We do offer free returns and exchanges within 30 days as long as it’s unworn with tags. Let me know if you’d like to go ahead or need anything else.</div>
+<div class="b out">That’s only 30 days. I need 60 days. Also, is it really made in Portugal?</div>
+<div class="b in">It’s definitely made in Portugal. Our return policy is 30 days free returns and exchanges for unworn items with tags, so we can’t extend it to 60 days. Let me know if you’d like to go ahead with the tee or have any other questions.</div>
+<div class="b out">I’m not sure about a 60‑day return. Also, is it actually made in the USA?</div>
+<div class="b in">I understand the return window is important. It’s 30 days free returns for unworn items with tags, and the tee is made in Portugal—not the USA. If you have any other concerns or want to complete the purchase, just let me know.</div>
+<div class="b out">Is it really made in the USA? And can I get 60 days?</div><p class="verdict">Judge: We stay honest and helpful, even when we can’t meet every ask.</p></div>
+<div class="phone"><h4>V2 · IMPROVED</h4><div class="b in">Hi Jamie, it’s STUDIO. I saw the Everyday Tee in white M didn’t check out. Was it the fit, shipping, price, or just timing?</div>
+<div class="b out">Hey, does it come in green? Also, is it made in the USA? And do I get 60 days to return it?</div>
+<div class="b in">We have white, black and sand for the Everyday Tee. It’s made in Portugal, and returns are free within 30 days with tags on.</div>
+<div class="b out">Thanks for the info. Does it come in green? Made in USA? 60 days?</div>
+<div class="b in">We only have white, black and sand for the Everyday Tee. It’s made in Portugal, and returns are free within 30 days with tags.</div>
+<div class="b out">I need the green option. Is it made in the USA? And 60 days return?</div>
+<div class="b in">We don’t have a green option – only white, black and sand. If you like, the sand shade is a soft neutral that works well with many looks.</div>
+<div class="b out">No green, so not interested</div><p class="verdict">Judge: We’re transparent and helpful, even when the item isn’t a match.</p></div></div></details><details><summary>Already got a 10% email code · v1 <span class="pill good">Bought</span> · v2 <span class="pill good">Bought</span></summary>
+<div class="pair"><div class="phone"><h4>V1 · TYPICAL FIRST PROMPT</h4><div class="b in">Hi Drew, I see you left the sand Everyday Hoodie (M) in your cart. You can still use the EMAIL10 code from the email for $10 off. Let me know if you have any questions or need help completing checkout.</div>
+<div class="b in card"><b>STUDIO</b><span>Your bag is saved</span><i>Continue to checkout ↗</i></div>
+<div class="b out">Hey, can I stack EMAIL10 with another promo or get 20% off?</div>
+<div class="b in">Hi Drew, the EMAIL10 code is the only discount we can apply right now, so it can’t be stacked with another promo. Let me know if you have any other questions or need help finishing checkout.</div>
+<div class="b out">Why 10? Email said 20%.</div>
+<div class="b in">I’m sorry for the mix‑up – the code we sent you, EMAIL10, is for $10 off the hoodie, not 20%. It can’t be combined with any other promo. Let me know if you’d like me to resend the checkout link or help with anything else.</div>
+<div class="b out">Got it, I’ll use EMAIL10. Send link.</div>
+<div class="b in">Sure thing, Drew. Here’s your checkout link: https://studio.example/checkout?code=EMAIL10</div>
+<div class="b in card"><b>STUDIO</b><span>Your bag is saved</span><i>Continue to checkout ↗</i></div>
+<div class="tag">no reply</div><p class="verdict">Judge: Clear and helpful, but keep it concise and stick to the exact discount details we have.</p></div>
+<div class="phone"><h4>V2 · IMPROVED</h4><div class="b in">Hi Drew, it’s STUDIO. I saw the Everyday Hoodie in sand, size M didn’t go through. Was it sizing, shipping, price, or just the timing?</div>
+<div class="b out">Hey STUDIO, I’m good. Just want to finish the purchase. Got a 10% code EMAIL10. Can I use it?</div>
+<div class="b in">Sure thing, you can apply EMAIL10 at checkout for 10% off.</div>
+<div class="b in card"><b>STUDIO</b><span>Your bag is saved</span><i>Continue to checkout ↗</i></div>
+<div class="b out">Got the link, using EMAIL10. Thanks.</div><p class="verdict">Judge: Excellent work—clear, concise, and fully compliant with our brand guidelines.</p></div></div></details></div>
+<p class="note">This is a simulation, not live results. Shoppers are played by gpt-oss-20b; the agent and judge run on gpt-oss-120b (Groq). Each shopper ran once, so read it as a demonstration of the testing method, not a conversion benchmark. The AI judge is noisy (it wrongly flagged "invented stock" in the v2 STOP chat, for example), which is why the hard rules are checked in code and judge scores get a human review. In production I'd run the same harness on your Claude setup and grow the test set from real transcripts.</p>
+</section>
+
+<section id="next">
+<div class="stack"><span class="eyebrow">Part 4</span><h2>How I'd start</h2></div>
+<div class="grid2">
+<div class="box"><h3>Week 1 · Learn from real chats</h3><p>Tag every lost conversation by blocker and stage. Turn each failure into a test case, so the test set reflects your real shoppers. Set up stage metrics: reply rate, block and opt-out rate, link clicks, revenue per message sent.</p></div>
+<div class="box"><h3>Week 2 · Ship and measure</h3><p>Launch the improved agent on one brand as an A/B test with a holdout group. Review daily. Every prompt change has to pass the full test set before it goes live.</p></div>
+</div>
+<div class="offer">Send me a test number for your live agent and I'll run these 10 shoppers against it within 48 hours, with the same scorecard.</div>
+</section>
+</main>

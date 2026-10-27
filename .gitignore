@@ -1,0 +1,6 @@
+.env
+__pycache__/
+.DS_Store
+LOOM_SCRIPT.md
+live/chats.json
+results/*.log

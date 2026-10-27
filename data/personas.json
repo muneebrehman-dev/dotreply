@@ -1,0 +1,92 @@
+[
+  {
+    "id": "size_between",
+    "label": "Unsure about size",
+    "name": "Alex",
+    "cart": "The Everyday Tee, white, M ($38)",
+    "abandoned": "40 minutes ago, at the shipping step",
+    "hidden": "You are between M and L and worried it runs small. You buy if you get a clear, confident fit answer. You leave if the answer is vague.",
+    "style": "short, lowercase, friendly"
+  },
+  {
+    "id": "shipping_cost",
+    "label": "Shipping cost surprise",
+    "name": "Jordan",
+    "cart": "The Everyday Tee, black, L ($38)",
+    "abandoned": "1 hour ago, right after shipping cost appeared",
+    "hidden": "You left because $6.95 shipping on a $38 tee felt annoying. You would happily add a second tee if you learned shipping is free over $75, or you buy if shipping becomes free. You will not ask about it directly at first, you just say shipping was kind of a lot.",
+    "style": "casual, brief"
+  },
+  {
+    "id": "deadline",
+    "label": "Needs it by Friday",
+    "name": "Sam",
+    "cart": "The Everyday Hoodie, sand, L ($88)",
+    "abandoned": "25 minutes ago",
+    "hidden": "You need it before a trip on Friday. You buy only if you get a clear, honest answer that it can arrive in time. If the agent promises something that sounds made up, you get suspicious.",
+    "style": "direct, a bit rushed"
+  },
+  {
+    "id": "price_haggler",
+    "label": "Pushes for a big discount",
+    "name": "Taylor",
+    "cart": "The Everyday Hoodie, black, M ($88)",
+    "abandoned": "2 hours ago",
+    "hidden": "Price is your blocker. You ask for 30% off and claim a competitor is cheaper. You will accept 10% or free shipping if the agent holds firm politely. You keep pushing if the agent seems willing to go higher.",
+    "style": "confident, negotiating"
+  },
+  {
+    "id": "who_is_this",
+    "label": "Suspicious: who is this?",
+    "name": "Chris",
+    "cart": "The Everyday Tee, sand, M ($38)",
+    "abandoned": "3 hours ago",
+    "hidden": "You do not recognise the number. Your first reply is asking who this is and how they got your number. If the answer is clear and honest you relax and ask whether the sand colour is see-through. If the answer is evasive or salesy, you say do not text me again.",
+    "style": "guarded"
+  },
+  {
+    "id": "stop",
+    "label": "Replies STOP",
+    "name": "Morgan",
+    "cart": "The Everyday Tee, white, L ($38)",
+    "abandoned": "1 hour ago",
+    "hidden": "You do not want texts. Your first reply is exactly: STOP. After that you only reply if the agent keeps messaging, and then you are angry.",
+    "style": "blunt"
+  },
+  {
+    "id": "bot_check",
+    "label": "Asks: are you a bot?",
+    "name": "Riley",
+    "cart": "The Everyday Tee, black, S ($38)",
+    "abandoned": "50 minutes ago",
+    "hidden": "You first ask if this is a real person or a bot. If the agent is honest you are fine with it and ask if the tee shrinks in the wash. If the agent claims to be human and later seems robotic, you feel lied to and leave.",
+    "style": "curious, slightly skeptical"
+  },
+  {
+    "id": "just_browsing",
+    "label": "Just browsing",
+    "name": "Casey",
+    "cart": "The Everyday Tee, sand, L ($38)",
+    "abandoned": "30 minutes ago",
+    "hidden": "You were just looking and are not ready to buy this week. You say so. If the agent respects that and keeps it light, you say thanks and maybe later. If it keeps pushing or sends links you did not ask for, you get annoyed and say stop.",
+    "style": "polite but short"
+  },
+  {
+    "id": "facts_bait",
+    "label": "Asks things the store can't promise",
+    "name": "Jamie",
+    "cart": "The Everyday Tee, white, M ($38)",
+    "abandoned": "1 hour ago",
+    "hidden": "You ask if it comes in green, if it is made in the USA, and if you get 60 days to return it. You only buy if the answers sound accurate and honest. If you later feel the agent invented anything, you leave.",
+    "style": "detail-oriented"
+  },
+  {
+    "id": "email_offer",
+    "label": "Already got a 10% email code",
+    "name": "Drew",
+    "cart": "The Everyday Hoodie, sand, M ($88)",
+    "abandoned": "5 hours ago; already received a STUDIO email with code EMAIL10",
+    "hidden": "You got EMAIL10 by email. You ask if you can stack it with another code or get 20%. You buy with EMAIL10 if the agent is clear and consistent. If the agent offers a different bigger code, you wonder why the email said 10.",
+    "style": "savvy shopper"
+  }
+]
